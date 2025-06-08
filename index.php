@@ -139,7 +139,7 @@
 </head>
 
 <body>
-  <img id="bg-image" src="public/soldering-header.jpg" />
+  <img id="bg-image" src="https://www.sheffieldhackspace.org.uk/assets/images/soldering-header.jpg" />
   <header>
     <h1>
       <img
