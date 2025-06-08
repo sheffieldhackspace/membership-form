@@ -92,7 +92,7 @@
       max-width: 100%;
     }
 
-    form .privacy {
+    .privacy {
       opacity: 0.8;
       font-size: 1rem;
       font-style: italic;
@@ -109,6 +109,16 @@
     .optional {
       margin-left: 1rem;
       width: calc(100% - 1rem);
+    }
+
+    .thanks {
+      font-family: "Big Noodle Titling";
+      font-size: 3rem;
+      text-align: center;
+    }
+
+    .error {
+      color: red;
     }
 
     footer {
@@ -134,6 +144,12 @@
         display: block;
       }
 
+      header h1 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
     }
   </style>
 </head>
@@ -154,17 +170,24 @@
   ?>
   <main>
     <h2>Instructions</h2>
+    <p>
+      Come to any of the open evenings for free up to three times, to see if the space is what you want. If you think so, then become a member to keep on visiting, tinkering, and experimenting with us!
+    </p>
     <p>To become a member you must:</p>
     <ol>
       <li>fill in and submit this form</li>
       <li>
-        pay the <span class="incomplete">current membership rates</span>
+        pay the monthly £10 membership fee — by setting up a monthly £10 standing order to the <a href="https://wiki.shhm.uk/dokuwiki/doku.php?id=info:bank">Sheffield Hackspace bank account</a> – on the 15th of the month – with a clear reference (e.g., <i>"Subs&nbsp;Holly&nbsp;R"</i>)</span>
       </li>
     </ol>
-    <p>For the process for becoming a keyholder (24/7 access), see <a href="https://wiki.shhm.uk/dokuwiki/doku.php?id=faq">the wiki</a>.</p>
-    <hr />
+    <p class="privacy">
+      Everyone should be able to be a part of the community, so if you are on low income/a student/a retiree/have trouble affording this rate, please reach out to <a href="mailto:trustees@sheffieldhackspace.org.uk">trustees@sheffieldhackspace.org.uk</a> to discuss a discounted rate.
+    </p>
+    <p class="privacy">For the process for becoming a keyholder (24/7 access), see <a href="https://wiki.shhm.uk/dokuwiki/doku.php?id=faq">the wiki</a>.</p>
+    <hr id="result-top" />
     <?php
 
+    // set up mailer
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\Exception;
 
@@ -174,58 +197,100 @@
 
     $mail = new PHPMailer(true);
 
+    // form submit logic
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-      $env = parse_ini_file('.env');
-
-      $msg = "";
-      foreach ($_POST as $key => $value) {
-        $msg = $msg . htmlspecialchars($key) . ": " . htmlspecialchars($value) . ", ";
-      }
-
-      $message = $msg;
-
-      try {
-        //Server settings
-        $mail->isSMTP();
-        $mail->Host       = $env["SMTP_HOST"];
-        $mail->SMTPAuth   = true;
-        $mail->Username   = $env["SMTP_USERNAME"];
-        $mail->Password   = $env["SMTP_PASSWORD"];
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-        $mail->Port       = $env["SMTP_PORT"];
-
-        //Recipients
-        $mail->setFrom($env["SMTP_FROM"], 'Mailer');
-        $mail->addAddress($env["SMTP_TO"]);
-
-        //Content
-        $mail->Subject = 'New Membership Form Entry';
-        $mail->Body    = $msg;
-
-        if (!$env["DISABLE_EMAIL"]) {
-          $mail->send();
-        } else {
-          echo "<span style='color:#f008;'>no email sent… DISABLE_EMAIL set in env file</span>";
-        }
+      // check important data exists
+      function bad($what)
+      {
+        http_response_code(400);
     ?>
-        <p>Your application was sent!</p>
-        <a href="/">back</a>
-      <?php
-      } catch (Exception $e) {
-        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        <h2 class="error">Error!</h2>
+        <p class="error">
+          Your submission didn't have: <?= $what ?>
+        </p>
+        <p>
+          If this continue to cause problems, please email <a href="mailto:trustees@sheffieldhackspace.org.uk">trustees@sheffieldhackspace.org.uk</a>
+        </p>
+        <?php
       }
+      if (!array_key_exists("name", $_POST) || $_POST['name'] == "")
+        bad("name");
+      else if (!array_key_exists("address", $_POST) || $_POST['address'] == "")
+        bad("address");
+      else if (!array_key_exists("email", $_POST) || $_POST['email'] == "")
+        bad("email");
+      else if (!array_key_exists("privacy", $_POST) || $_POST['privacy'] == "")
+        bad("privacy");
+      else {
+        $env = parse_ini_file('.env');
+
+        $msg = "";
+        foreach ($_POST as $key => $value) {
+          $msg = $msg . htmlspecialchars($key) . ": " . htmlspecialchars($value) . ", ";
+        }
+
+        $message = $msg;
+
+        try {
+          //Server settings
+          $mail->isSMTP();
+          $mail->Host       = $env["SMTP_HOST"];
+          $mail->SMTPAuth   = true;
+          $mail->Username   = $env["SMTP_USERNAME"];
+          $mail->Password   = $env["SMTP_PASSWORD"];
+          $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+          $mail->Port       = $env["SMTP_PORT"];
+
+          //Recipients
+          $mail->setFrom($env["SMTP_FROM"], 'Mailer');
+          $mail->addAddress($env["SMTP_TO"]);
+
+          //Content
+          $mail->Subject = 'New Membership Form Entry';
+          $mail->Body    = $msg;
+
+          if (!$env["DISABLE_EMAIL"]) {
+            $mail->send();
+          } else {
+            echo "<span style='color:#f008;'>no email sent… DISABLE_EMAIL set in env file</span>";
+          }
+        ?>
+          <p class="thanks">Thanks!</p>
+          <h2>Your membership application was sent!</h2>
+          <p>
+            A director should be in contact via email in the next 7 days to confirm. If you do not get an email, please check your junk or email <a href="mailto:trustees@sheffieldhackspace.org.uk">trustees@sheffieldhackspace.org.uk</a>.
+          </p>
+          <p>
+            If you haven't already, remember to set up a standing order for your subscription. See above for details — or read more on the <a href="https://wiki.shhm.uk/dokuwiki/doku.php?id=faq">Frequently Asked Questions</a> section of the wiki.
+          </p>
+        <?php
+        } catch (Exception $e) {
+        ?>
+          <h2 class="error">Error!</h2>
+          <p class="error">
+            Message could not be sent. Mailer Error:
+          <pre><?= $mail->ErrorInfo ?></pre>
+          </p>
+          <p>
+            If this continue to cause problems, please email <a href="mailto:trustees@sheffieldhackspace.org.uk">trustees@sheffieldhackspace.org.uk</a>
+          </p>
+      <?php
+        }
+      } ?>
+      <hr>
+      <a href="/">back to form</a>
+    <?php
     } else {
 
-      ?>
+    ?>
       <h2>Membership Sign-Up</h2>
-      <form method="POST" action="" autocomplete="off">
+      <form method="POST" action="/#result-top" autocomplete="off">
         <label class="above required" for="name">Full Name</label>
         <input
           type="text"
           name="name"
           id="name"
-          autocomplete="name"
           required="true" />
 
         <label class="above required" for="address">Address ("<a href="https://en.wikipedia.org/wiki/Service_address">Service address</a>")</label>
@@ -236,7 +301,8 @@
           type="text"
           name="email"
           id="email"
-          autocomplete="email"
+          pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
+          title="Invalid email address"
           required="true" />
 
         <p class="optional">Have you been a member of a hackspace before? (optional)</p>
@@ -258,8 +324,7 @@
           class="optional"
           type="text"
           name="discord"
-          id="discord"
-          autocomplete="discord" />
+          id="discord" />
 
         <label class="above optional" for="interests">
           Do you have any specific interests? (optional)
@@ -276,7 +341,7 @@
           Sheffield Hackspace stores this information on a password-protected <a href="https://nextcloud.com/">NextCloud</a> Drive. According to Chapter 2 (113 & 113A) of the <a href="https://www.legislation.gov.uk/ukpga/2006/46/part/8/chapter/2">Companies Act 2006</a>, we must legally collect a name and service address for each member, which must be kept for ten years. After termination of membership, any other data will be stored for <span class="incomplete">up to three years</span> in case of return, unless you request its deletion by emailing <a href="mailto:trustees@sheffieldhackspace.org.uk">trustees@sheffieldhackspace.org.uk</a>.
         </p>
 
-        <input type="checkbox" id="privacy" required="true">
+        <input type="checkbox" id="privacy" name="privacy" required="true">
         <label for="privacy" class="checkable">
           <span class="required">
             I consent for Sheffield Hackspace to keep my details and use them in the ways detailed above
@@ -303,6 +368,7 @@
       <a href="https://github.com/sheffieldhackspace/membership-form">source</a>
     </p>
   </footer>
+  <br>
 </body>
 
 </html>
