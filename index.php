@@ -57,6 +57,9 @@
       min-width: min(80vw, 30rem);
       text-align: center;
       font-size: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     header img {
@@ -72,6 +75,7 @@
       font-family: "DINPro";
       padding: 2rem;
       border-radius: 1rem;
+      width: min(40rem, 90vw);
     }
 
     form label.above {
@@ -79,13 +83,19 @@
       margin-top: 1rem;
     }
 
-    form .required::after {
+    .required::after {
       content: " *";
       color: red;
     }
 
     form input {
       max-width: 100%;
+    }
+
+    form .privacy {
+      opacity: 0.8;
+      font-size: 1rem;
+      font-style: italic;
     }
 
     form button.submit {
@@ -106,6 +116,24 @@
       padding: 2rem;
       border-radius: 1rem;
       font-size: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    footer p {
+      margin: 0.25rem 0;
+    }
+
+    @media (width < 50rem) {
+      header {
+        font-size: 1rem;
+      }
+
+      header img {
+        display: block;
+      }
+
     }
   </style>
 </head>
@@ -121,7 +149,20 @@
       Sheffield Hackspace Membership Form
     </h1>
   </header>
+  <?php
+
+  ?>
   <main>
+    <h2>Instructions</h2>
+    <p>To become a member you must:</p>
+    <ol>
+      <li>fill in and submit this form</li>
+      <li>
+        pay the <span class="incomplete">current membership rates</span>
+      </li>
+    </ol>
+    <p>For the process for becoming a keyholder (24/7 access), see <a href="https://wiki.shhm.uk/dokuwiki/doku.php?id=faq">the wiki</a>.</p>
+    <hr />
     <?php
 
     use PHPMailer\PHPMailer\PHPMailer;
@@ -178,7 +219,7 @@
 
       ?>
       <h2>Membership Sign-Up</h2>
-      <form method="POST" action="">
+      <form method="POST" action="" autocomplete="off">
         <label class="above required" for="name">Full Name</label>
         <input
           type="text"
@@ -187,8 +228,7 @@
           autocomplete="name"
           required="true" />
 
-        <label class="above required" for="address">Address (home or
-          <a href="https://en.wikipedia.org/wiki/Service_address">service</a>)</label>
+        <label class="above required" for="address">Address ("<a href="https://en.wikipedia.org/wiki/Service_address">Service address</a>")</label>
         <input type="text" name="address" id="address" required="true" />
 
         <label class="above required" for="email">Email</label>
@@ -199,21 +239,19 @@
           autocomplete="email"
           required="true" />
 
-        <p class="required">Have you been a member of a hackspace before?</p>
+        <p class="optional">Have you been a member of a hackspace before? (optional)</p>
         <input
           type="radio"
           name="memberbefore"
           id="memberbefore_yes"
-          value="yes"
-          required="true" />
-        <label for="memberbefore_yes" class="checkable">Yes</label>
+          value="yes" />
+        <label for="memberbefore_yes" class="checkable optional">Yes</label>
         <input
           type="radio"
           name="memberbefore"
           id="memberbefore_no"
-          value="no"
-          required="true" />
-        <label for="memberbefore_no" class="checkable">No</label>
+          value="no" />
+        <label for="memberbefore_no" class="checkable optional">No</label>
 
         <label class="above optional" for="discord">Discord Username (optional)</label>
         <input
@@ -224,17 +262,47 @@
           autocomplete="discord" />
 
         <label class="above optional" for="interests">
-          Do you have any interests (optional)
+          Do you have any specific interests? (optional)
         </label>
         <textarea class="optional" name="interests" id="interests"></textarea>
+
+        <p class="privacy">
+          Sheffield Hackspace does not currently have a privacy policy (<a href="https://wiki.shhm.uk/dokuwiki/doku.php?id=info:privacy">why?</a>).
+        </p>
+        <p class="privacy">
+          Sheffield Hackspace will use the data above to: manage membership, subscriptions, and space access; keep track of tool inductions; and to send emails about general meetings and other organisational changes.
+        </p>
+        <p class="privacy">
+          Sheffield Hackspace stores this information on a password-protected <a href="https://nextcloud.com/">NextCloud</a> Drive. According to Chapter 2 (113 & 113A) of the <a href="https://www.legislation.gov.uk/ukpga/2006/46/part/8/chapter/2">Companies Act 2006</a>, we must legally collect a name and service address for each member, which must be kept for ten years. After termination of membership, any other data will be stored for <span class="incomplete">up to three years</span> in case of return, unless you request its deletion by emailing <a href="mailto:trustees@sheffieldhackspace.org.uk">trustees@sheffieldhackspace.org.uk</a>.
+        </p>
+
+        <input type="checkbox" id="privacy" required="true">
+        <label for="privacy" class="checkable">
+          <span class="required">
+            I consent for Sheffield Hackspace to keep my details and use them in the ways detailed above
+          </span>
+        </label>
+
 
         <hr class="bottom" />
         <button class="submit" type="submit">Submit</button>
       </form>
+    <?php
+    }
+    ?>
   </main>
-  <footer>source code</footer>
+  <footer>
+    <p>
+      Sheffield Hackspace Membership Form
+    </p>
+    <p>
+      For questions, email <a href="mailto:trustees@sheffieldhackspace.org.uk">trustees@sheffieldhackspace.org.uk</a>
+    </p>
+    <p>Something broken or misleading? <a href="https://github.com/sheffieldhackspace/membership-form">suggest a change!</a></p>
+    <p>
+      <a href="https://github.com/sheffieldhackspace/membership-form">source</a>
+    </p>
+  </footer>
 </body>
 
 </html>
-<?php
-    }
