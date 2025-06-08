@@ -197,6 +197,8 @@
 
     $mail = new PHPMailer(true);
 
+    $env = parse_ini_file('.env');
+
     // form submit logic
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -223,8 +225,6 @@
       else if (!array_key_exists("privacy", $_POST) || $_POST['privacy'] == "")
         bad("privacy");
       else {
-        $env = parse_ini_file('.env');
-
         $msg = "";
         foreach ($_POST as $key => $value) {
           $msg = $msg . htmlspecialchars($key) . ": " . htmlspecialchars($value) . ", ";
@@ -285,6 +285,12 @@
 
     ?>
       <h2>Membership Sign-Up</h2>
+      <?php if ($env["DISABLE_EMAIL"]) {
+      ?>
+        <h2 class="error">test mode enabled!</h2>
+        <p class="error">no emails will be sent. feel free to play around with submitting</p>
+      <?php
+      } ?>
       <form method="POST" action="/#result-top" autocomplete="off">
         <label class="above required" for="name">Full Name</label>
         <input
