@@ -231,7 +231,7 @@
         }
 
         file_put_contents(
-          "submissions" . DIRECTORY_SEPARATOR . date("Y-m-d\TH:i:s") . ($env["DISABLE_EMAIL"] ? "_TEST_" : "") . "-" . uniqid(),
+          "submissions" . DIRECTORY_SEPARATOR . date("Y-m-d\TH:i:s") . ($env["DISABLE_EMAIL"] ? "_TEST_" : "") . "-" . uniqid() . ".txt",
           $msg,
         );
 
