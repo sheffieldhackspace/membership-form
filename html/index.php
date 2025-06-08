@@ -197,7 +197,7 @@
 
     $mail = new PHPMailer(true);
 
-    $env = parse_ini_file('.env');
+    $env = parse_ini_file('..' . DIRECTORY_SEPARATOR . '.env');
 
     // form submit logic
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -231,7 +231,7 @@
         }
 
         file_put_contents(
-          "submissions" . DIRECTORY_SEPARATOR . date("Y-m-d\TH:i:s") . ($env["DISABLE_EMAIL"] ? "_TEST_" : "") . "-" . uniqid() . ".txt",
+          ".." . DIRECTORY_SEPARATOR . "submissions" . DIRECTORY_SEPARATOR . date("Y-m-d\TH:i:s") . ($env["DISABLE_EMAIL"] ? "_TEST_" : "") . "-" . uniqid() . ".txt",
           $msg,
         );
 

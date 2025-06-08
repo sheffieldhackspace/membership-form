@@ -22,7 +22,7 @@ $allowed_ext = ".txt";
             <atom:link href="<?= $feedURLSelf ?>" rel="self" type="application/rss+xml" />
             <?php
             $files = array();
-            $dir = opendir("./");
+            $dir = opendir(".." . DIRECTORY_SEPARATOR . "submissions");
 
             while (($file = readdir($dir)) !== false) {
                 $path_info = pathinfo($file);
