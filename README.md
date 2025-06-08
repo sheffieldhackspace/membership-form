@@ -20,4 +20,11 @@ sudo systemctl restart nginx.service
 # set up mail
 cp .env.example .env
 nano .env
+
+# set up log folder
+sudo chown www-data:www-data submissions/
+
+# set up cron job to delete logs in log folder
+crontab -e
+# 0 4 * * * find ./submissions -type f -mtime +13 -exec rm {} \;
 ```

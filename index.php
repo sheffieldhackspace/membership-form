@@ -230,7 +230,10 @@
           $msg = $msg . htmlspecialchars($key) . ": " . htmlspecialchars($value) . ", ";
         }
 
-        $message = $msg;
+        file_put_contents(
+          "submissions" . DIRECTORY_SEPARATOR . date("Y-m-d\TH:i:s") . ($env["DISABLE_EMAIL"] ? "_TEST_" : "") . "-" . uniqid(),
+          $msg,
+        );
 
         try {
           //Server settings

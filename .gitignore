@@ -1,2 +1,5 @@
 # secrets
 /.env
+
+# log
+/submissions
