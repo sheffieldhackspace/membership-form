@@ -28,3 +28,21 @@ sudo chown www-data:www-data submissions/
 crontab -e
 # 0 4 * * * find ./submissions -type f -mtime +13 -exec rm {} \;
 ```
+
+## What the form should do:
+
+- [x] form should
+  - [x] check that required entries are filled (`if(empty($_POST['name'])`)
+  - [x] send an email
+  - [x] log to a file locally (not long lasting)
+  - [x] update an RSS feed or other file accessible to check that the emails are sending properly
+- [x] form should (while)
+  - [x] explain how to be a keyholder (link to wiki)
+  - [x] explain what data we need to legally collect
+  - [x] explain what happens to personal data (privacy policy)
+    - [x] require consent for processing of personal data
+  - [x] explain how to ask any questions (link to wiki and email)
+- [x] form should (after)
+  - [x] explain what to do next (pay via bank transfer and link to wiki)
+    - [x] via content on page
+    - [ ] via email
