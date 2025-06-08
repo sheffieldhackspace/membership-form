@@ -123,39 +123,60 @@
   </header>
   <main>
     <?php
+
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\Exception;
+
+    require 'PHPMailer/src/Exception.php';
+    require 'PHPMailer/src/PHPMailer.php';
+    require 'PHPMailer/src/SMTP.php';
+
+    $mail = new PHPMailer(true);
+
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+      $env = parse_ini_file('.env');
 
       $msg = "";
       foreach ($_POST as $key => $value) {
         $msg = $msg . htmlspecialchars($key) . ": " . htmlspecialchars($value) . ", ";
       }
 
-      $email   = 'trustees@sheffieldhackspace.org.uk';
-      $to      =  $email;
-      $subject = 'New Membership Form Entry';
       $message = $msg;
-      $headers = 'From: ' . $email . "\r\n" .
-        'X-Mailer: PHP/' . phpversion();
 
-      $success = mail($to, $subject, $message, $headers);
-      if ($success) {
-        echo "sent an email to " . $to . "!";
-      } else {
-        echo "looks like the emailing failed";
+      try {
+        //Server settings
+        $mail->isSMTP();
+        $mail->Host       = $env["SMTP_HOST"];
+        $mail->SMTPAuth   = true;
+        $mail->Username   = $env["SMTP_USERNAME"];
+        $mail->Password   = $env["SMTP_PASSWORD"];
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+        $mail->Port       = $env["SMTP_PORT"];
+
+        //Recipients
+        $mail->setFrom($env["SMTP_FROM"], 'Mailer');
+        $mail->addAddress($env["SMTP_TO"]);
+
+        //Content
+        $mail->Subject = 'New Membership Form Entry';
+        $mail->Body    = $msg;
+
+        if (!$env["DISABLE_EMAIL"]) {
+          $mail->send();
+        } else {
+          echo "<span style='color:#f008;'>no email sent… DISABLE_EMAIL set in env file</span>";
+        }
+    ?>
+        <p>Your application was sent!</p>
+        <a href="/">back</a>
+      <?php
+      } catch (Exception $e) {
+        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
       }
     } else {
 
-    ?>
-      <h2>Instructions</h2>
-      <p>To become a member you must:</p>
-      <ol>
-        <li>fill in and submit this form</li>
-        <li>
-          pay the <span class="incomplete">current membership rates</span>
-        </li>
-      </ol>
-      <p>To become a keyholder, <span class="incomplete">do this</span>.</p>
-      <hr />
+      ?>
       <h2>Membership Sign-Up</h2>
       <form method="POST" action="">
         <label class="above required" for="name">Full Name</label>
