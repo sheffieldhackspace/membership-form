@@ -242,7 +242,11 @@
           $mail->SMTPAuth   = true;
           $mail->Username   = $env["SMTP_USERNAME"];
           $mail->Password   = $env["SMTP_PASSWORD"];
-          $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+          $mail->SMTPSecure = match ($env["SMTP_TLS"]) {
+            "STARTTLS" => PHPMailer::ENCRYPTION_STARTTLS,
+            "SMTPS" => PHPMailer::ENCRYPTION_SMTPS,
+            default => PHPMailer::ENCRYPTION_SMTPS,
+          };
           $mail->Port       = $env["SMTP_PORT"];
 
           //Recipients
