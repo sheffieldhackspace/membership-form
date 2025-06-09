@@ -47,6 +47,8 @@
       z-index: -1;
       filter: saturate(100%) blur(5px);
       filter: saturate(40%) blur(5px);
+      min-width: 100vw;
+      min-height: 100vh;
     }
 
     header {
