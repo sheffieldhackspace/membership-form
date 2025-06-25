@@ -203,7 +203,10 @@
 
     $mail = new PHPMailer(true);
 
+    // parse environment
     $env = parse_ini_file('..' . DIRECTORY_SEPARATOR . '.env');
+    // parse query string
+    parse_str($_SERVER['QUERY_STRING'], $query_vars);
 
     // form submit logic
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -297,6 +300,20 @@
       } ?>
       <hr>
       <a href="/">back to form</a>
+    <?php
+    } else if (array_key_exists("notice", $query_vars) && $query_vars["notice"] == "new") {
+    ?>
+      <h2>New Membership Form</h2>
+      <p>Welcome to the new membership form!</p>
+      <p>
+        Unlike the old form, this should <i>only</i> be filled in when you want to become a member.
+      </p>
+      <p>
+        If you are just interested in the space, and don't want to be a member <i>just yet</i>, you can keep in touch with the <a href="https://www.sheffieldhackspace.org.uk/">socials</a> & the <a href="https://www.sheffieldhackspace.org.uk/blog/">blog</a>, and find up-to-date information about joining on the <a href="https://wiki.sheffieldhackspace.org.uk/">wiki</a>. Remember that you can visit for free up to three times to see if the space is what you want!
+      </p>
+      <p>
+        If you are ready to become a member, please <a href="/">continue to the membership form</a>.
+      </p>
     <?php
     } else {
 
