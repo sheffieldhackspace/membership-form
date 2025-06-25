@@ -240,8 +240,10 @@
       } else {
         $msg = "";
         foreach ($_POST as $key => $value) {
-          $msg = $msg . htmlspecialchars($key) . ": " . htmlspecialchars($value) . ", ";
+          $msg = $msg . htmlspecialchars($key) . ': ' . htmlspecialchars($value) . "\n";
         }
+        $msg = $msg . "\n";
+        $msg = $msg . json_encode($_POST);
 
         file_put_contents(
           ".." . DIRECTORY_SEPARATOR . "submissions" . DIRECTORY_SEPARATOR . date("Y-m-d\TH:i:s") . ($env["DISABLE_EMAIL"] ? "_TEST_" : "") . "-" . uniqid() . ".txt",
