@@ -353,7 +353,7 @@
           Sheffield Hackspace will use the data above to: manage membership, subscriptions, and space access; keep track of tool inductions; and to send emails about general meetings and other organisational changes.
         </p>
         <p class="privacy">
-          Sheffield Hackspace stores this information on a password-protected <a href="https://nextcloud.com/">NextCloud</a> Drive. According to Chapter 2 (113 & 113A) of the <a href="https://www.legislation.gov.uk/ukpga/2006/46/part/8/chapter/2">Companies Act 2006</a>, we must legally collect a name and service address for each member, which must be kept for ten years. After termination of membership, any other data will be stored for <span class="incomplete">up to three years</span> in case of return, unless you request its deletion by emailing <a href="mailto:trustees@sheffieldhackspace.org.uk">trustees@sheffieldhackspace.org.uk</a>.
+          Sheffield Hackspace stores this information on a password-protected <a href="https://nextcloud.com/">NextCloud</a> Drive. According to Chapter 2 (113 & 113A) of the <a href="https://www.legislation.gov.uk/ukpga/2006/46/part/8/chapter/2">Companies Act 2006</a>, we must legally collect a name and service address for each member, which must be kept for ten years. After termination of membership, any other data will be stored for up to three years in case of return, unless you request its deletion by emailing <a href="mailto:trustees@sheffieldhackspace.org.uk">trustees@sheffieldhackspace.org.uk</a>.
         </p>
 
         <input type="checkbox" id="privacy" name="privacy" required="true">
