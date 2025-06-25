@@ -282,7 +282,7 @@
             A director should be in contact via email in the next 7 days to confirm. If you do not get an email, please check your junk or email <a href="mailto:trustees@sheffieldhackspace.org.uk">trustees@sheffieldhackspace.org.uk</a>.
           </p>
           <p>
-            If you haven't already, remember to set up a standing order for your subscription. See above for details — or read more on the <a href="https://wiki.sheffieldhackspace.org.uk/members/faq">Frequently Asked Questions</a> section of the wiki.
+            If you haven't already, remember to set up a standing order for your subscription. See above for details — or read more on the <a href="https://wiki.sheffieldhackspace.org.uk/">Frequently Asked Questions</a> section of the wiki.
           </p>
         <?php
         } catch (Exception $e) {
