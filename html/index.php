@@ -416,7 +416,7 @@
     </p>
     <p>Something broken or misleading? <a href="https://github.com/sheffieldhackspace/membership-form">suggest a change!</a></p>
     <p>
-      <a href="https://github.com/sheffieldhackspace/membership-form">source</a>
+      v1.0.0 · <a href="https://github.com/sheffieldhackspace/membership-form">source</a>
     </p>
   </footer>
   <br>
