@@ -179,13 +179,13 @@
     <ol>
       <li>fill in and submit this form</li>
       <li>
-        pay the monthly £10 membership fee — by setting up a monthly £10 standing order to the <a href="https://wiki.shhm.uk/dokuwiki/doku.php?id=info:bank">Sheffield Hackspace bank account</a> – on the 15th of the month – with a clear reference (e.g., <i>"Subs&nbsp;Holly&nbsp;R"</i>)</span>
+        pay the monthly £10 membership fee — by setting up a monthly £10 standing order to the <a href="https://wiki.sheffieldhackspace.org.uk/members/info/bank">Sheffield Hackspace bank account</a> – on the 15th of the month – with a clear reference (e.g., <i>"Subs&nbsp;Holly&nbsp;R"</i>)</span>
       </li>
     </ol>
     <p class="privacy">
       Everyone should be able to be a part of the community, so if you are on low income/a student/a retiree/have trouble affording this rate, please reach out to <a href="mailto:trustees@sheffieldhackspace.org.uk">trustees@sheffieldhackspace.org.uk</a> to discuss a discounted rate.
     </p>
-    <p class="privacy">For the process for becoming a keyholder (24/7 access), see <a href="https://wiki.shhm.uk/dokuwiki/doku.php?id=faq">the wiki</a>.</p>
+    <p class="privacy">For the process for becoming a keyholder (24/7 access), see <a href="https://wiki.sheffieldhackspace.org.uk/members/faq">the wiki</a>.</p>
     <hr id="result-top" />
     <?php
 
@@ -271,7 +271,7 @@
             A director should be in contact via email in the next 7 days to confirm. If you do not get an email, please check your junk or email <a href="mailto:trustees@sheffieldhackspace.org.uk">trustees@sheffieldhackspace.org.uk</a>.
           </p>
           <p>
-            If you haven't already, remember to set up a standing order for your subscription. See above for details — or read more on the <a href="https://wiki.shhm.uk/dokuwiki/doku.php?id=faq">Frequently Asked Questions</a> section of the wiki.
+            If you haven't already, remember to set up a standing order for your subscription. See above for details — or read more on the <a href="https://wiki.sheffieldhackspace.org.uk/members/faq">Frequently Asked Questions</a> section of the wiki.
           </p>
         <?php
         } catch (Exception $e) {
@@ -347,7 +347,7 @@
         <textarea class="optional" name="interests" id="interests"></textarea>
 
         <p class="privacy">
-          Sheffield Hackspace does not currently have a privacy policy (<a href="https://wiki.shhm.uk/dokuwiki/doku.php?id=info:privacy">why?</a>).
+          Sheffield Hackspace does not currently have a privacy policy (<a href="https://wiki.sheffieldhackspace.org.uk/members/info/privacy">why?</a>).
         </p>
         <p class="privacy">
           Sheffield Hackspace will use the data above to: manage membership, subscriptions, and space access; keep track of tool inductions; and to send emails about general meetings and other organisational changes.
