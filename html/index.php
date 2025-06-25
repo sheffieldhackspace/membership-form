@@ -100,6 +100,10 @@
       font-style: italic;
     }
 
+    .notice {
+      margin: 0;
+    }
+
     form button.submit {
       margin: 0 auto;
     }
@@ -211,22 +215,26 @@
     ?>
         <h2 class="error">Error!</h2>
         <p class="error">
-          Your submission didn't have: <?= $what ?>
+          <?= $what ?>
         </p>
         <p>
           If this continue to cause problems, please email <a href="mailto:trustees@sheffieldhackspace.org.uk">trustees@sheffieldhackspace.org.uk</a>
         </p>
         <?php
       }
-      if (!array_key_exists("name", $_POST) || $_POST['name'] == "")
-        bad("name");
-      else if (!array_key_exists("address", $_POST) || $_POST['address'] == "")
-        bad("address");
-      else if (!array_key_exists("email", $_POST) || $_POST['email'] == "")
-        bad("email");
-      else if (!array_key_exists("privacy", $_POST) || $_POST['privacy'] == "")
-        bad("privacy");
-      else {
+      if (!array_key_exists("name", $_POST) || $_POST['name'] == "") {
+        bad("Your submission didn't have: name");
+      } else if (!array_key_exists("secret", $_POST) || $_POST['secret'] == "") {
+        bad("Your submission didn't have the secret word!");
+      } else if ($_POST['secret'] != $env["SECRET"]) {
+        bad("that's not the correct secret word :( You put: '" . htmlspecialchars($_POST['secret']) . "'. Make sure it's all lowercase!");
+      } else if (!array_key_exists("address", $_POST) || $_POST['address'] == "") {
+        bad("Your submission didn't have: address");
+      } else if (!array_key_exists("email", $_POST) || $_POST['email'] == "") {
+        bad("Your submission didn't have: email");
+      } else if (!array_key_exists("privacy", $_POST) || $_POST['privacy'] == "") {
+        bad("You did not agree to the privacy notice");
+      } else {
         $msg = "";
         foreach ($_POST as $key => $value) {
           $msg = $msg . htmlspecialchars($key) . ": " . htmlspecialchars($value) . ", ";
@@ -319,6 +327,17 @@
           pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
           title="Invalid email address"
           required="true" />
+
+        <label class="above required" for="secret">Secret Word</label>
+        <p class="privacy notice">
+          The secret word is on the noticeboard in the space, and is required to stop people (or bots) who have not visited the space signing up.
+        </p>
+        <input
+          type="text"
+          name="secret"
+          id="secret"
+          required="true" />
+
 
         <p class="optional">Have you been a member of a hackspace before? (optional)</p>
         <input
