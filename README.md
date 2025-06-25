@@ -1,6 +1,6 @@
 # Membership Form
 
-*not currently used*
+made/maintained by @alifeee
 
 ![screenshot of form](images/example_form.png)
 
