@@ -1,5 +1,7 @@
 # Membership Form
 
+<https://signup.sheffieldhackspace.org.uk/>
+
 made/maintained by @alifeee
 
 ![screenshot of form](images/example_form.png)
