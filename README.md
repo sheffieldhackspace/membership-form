@@ -45,4 +45,4 @@ crontab -e
 - [x] form should (after)
   - [x] explain what to do next (pay via bank transfer and link to wiki)
     - [x] via content on page
-    - [ ] via email
+    - [ ] send confirmation via email (should not block confirmation screen as email might fail)
