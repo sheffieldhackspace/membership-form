@@ -250,22 +250,43 @@
           $msg,
         );
 
-        try {
-          //Server settings
-          $mail->isSMTP();
-          $mail->Host       = $env["SMTP_HOST"];
-          $mail->SMTPAuth   = true;
-          $mail->Username   = $env["SMTP_USERNAME"];
-          $mail->Password   = $env["SMTP_PASSWORD"];
-          $mail->SMTPSecure = match ($env["SMTP_TLS"]) {
-            "STARTTLS" => PHPMailer::ENCRYPTION_STARTTLS,
-            "SMTPS" => PHPMailer::ENCRYPTION_SMTPS,
-            default => PHPMailer::ENCRYPTION_SMTPS,
-          };
-          $mail->Port       = $env["SMTP_PORT"];
+        //Server settings
+        $mail->isSMTP();
+        $mail->Host       = $env["SMTP_HOST"];
+        $mail->SMTPAuth   = true;
+        $mail->Username   = $env["SMTP_USERNAME"];
+        $mail->Password   = $env["SMTP_PASSWORD"];
+        $mail->SMTPSecure = match ($env["SMTP_TLS"]) {
+          "STARTTLS" => PHPMailer::ENCRYPTION_STARTTLS,
+          "SMTPS" => PHPMailer::ENCRYPTION_SMTPS,
+          default => PHPMailer::ENCRYPTION_SMTPS,
+        };
+        $mail->Port       = $env["SMTP_PORT"];
 
+        $is_mail_error = false;
+        $mail_error = "None!";
+        try {
+          // SEND EMAIL TO FORM SIGNER UPPER
+          $mail->setFrom($env["SMTP_FROM"], 'Sheffield Hackspace');
+          $mail->addAddress($_POST['email']);
+          $mail->addCC($env["SMTP_TO"]);
+
+          // Content
+          $mail->Subject = $env["CONFIRMATION_EMAIL_TITLE"];
+          $mail->Body = $env["CONFIRMATION_EMAIL_BODY"];
+
+          $mail->send();
+        } catch (Exception $e) {
+          $mail_error = $mail->ErrorInfo;
+          $is_mail_error = true;
+        }
+
+        $msg = $msg . "\n\n" . "mail error: " . $mail_error;
+
+        try {
+          $mail->clearAllRecipients(); // clear all
           //Recipients
-          $mail->setFrom($env["SMTP_FROM"], 'Mailer');
+          $mail->setFrom($env["SMTP_FROM"], 'Sign Up Form');
           $mail->addAddress($env["SMTP_TO"]);
 
           //Content
@@ -281,7 +302,14 @@
           <p class="thanks">Thanks!</p>
           <h2>Your membership application was sent!</h2>
           <p>
-            A director should be in contact via email in the next 7 days to confirm. If you do not get an email, please check your junk or email <a href="mailto:trustees@sheffieldhackspace.org.uk">trustees@sheffieldhackspace.org.uk</a>.
+            <?php if ($is_mail_error) : ?>
+              Note: an automatic email could not be sent to your personal email.
+            <?php else: ?>
+              An automatic email was sent to your personal email.
+            <?php endif; ?>
+          </p>
+          <p>
+            A director should be in contact via email in the next 7 days. If you do not get an email, please check your junk or email <a href="mailto:trustees@sheffieldhackspace.org.uk">trustees@sheffieldhackspace.org.uk</a>.
           </p>
           <p>
             If you haven't already, remember to set up a standing order for your subscription. See above for details — or read more on the <a href="https://wiki.sheffieldhackspace.org.uk/">Frequently Asked Questions</a> section of the wiki.
@@ -291,7 +319,7 @@
         ?>
           <h2 class="error">Error!</h2>
           <p class="error">
-            Message could not be sent. Mailer Error:
+            Membership form could not be submitted. Mailer Error:
           <pre><?= $mail->ErrorInfo ?></pre>
           </p>
           <p>
