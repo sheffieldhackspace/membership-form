@@ -400,6 +400,16 @@
           value="no" />
         <label for="memberbefore_no" class="checkable optional">No</label>
 
+        <label class="above optional" for="howfindout">How did you find out about Sheffield Hackspace? (optional)</label>
+        <p class="privacy notice optional">
+          e.g., via web search, word of mouth, social media, etc.
+        </p>
+        <input
+          class="optional"
+          type="text"
+          name="howfindout"
+          id="howfindout" />
+
         <label class="above optional" for="discord">Discord Username (optional)</label>
         <input
           class="optional"
