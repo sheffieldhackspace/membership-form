@@ -237,6 +237,8 @@
         bad("Your submission didn't have: email");
       } else if (!array_key_exists("privacy", $_POST) || $_POST['privacy'] == "") {
         bad("You did not agree to the privacy notice");
+      } else if (!array_key_exists("overeighteen", $_POST) || $_POST['overeighteen'] == "") {
+        bad("You did not agree that you are over 18");
       } else {
         $msg = "";
         foreach ($_POST as $key => $value) {
@@ -436,6 +438,17 @@
         <label for="privacy" class="checkable">
           <span class="required">
             I consent for Sheffield Hackspace to keep my details and use them in the ways detailed above
+          </span>
+        </label>
+
+        <p class="privacy">
+          Under-18s cannot be members, but can attend with a parent or guardian. See more on <a href="https://wiki.sheffieldhackspace.org.uk/">the FAQ page</a>.
+        </p>
+
+        <input type="checkbox" id="overeighteen" name="overeighteen" required="true">
+        <label for="overeighteen" class="checkable">
+          <span class="required">
+            I am over 18 years of age
           </span>
         </label>
 
