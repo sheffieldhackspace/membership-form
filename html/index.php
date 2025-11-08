@@ -183,13 +183,13 @@
     <ol>
       <li>fill in and submit this form</li>
       <li>
-        pay the monthly £10 membership fee — by setting up a monthly £10 standing order to the <a href="https://wiki.sheffieldhackspace.org.uk/members/info/bank">Sheffield Hackspace bank account</a> – on the 15th of the month – with a clear reference (e.g., <i>"Subs&nbsp;Holly&nbsp;R"</i>)</span>
+        pay the monthly £10 membership fee — by setting up a monthly £10 standing order to the <a target="_blank" href="https://wiki.sheffieldhackspace.org.uk/members/info/bank">Sheffield Hackspace bank account</a> – on the 15th of the month – with a clear reference (e.g., <i>"Subs&nbsp;Holly&nbsp;R"</i>)</span>
       </li>
     </ol>
     <p class="privacy">
       Everyone should be able to be a part of the community, so if you are on low income/a student/a retiree/have trouble affording this rate, please reach out to <a href="mailto:trustees@sheffieldhackspace.org.uk">trustees@sheffieldhackspace.org.uk</a> to discuss a discounted rate.
     </p>
-    <p class="privacy">For the process for becoming a keyholder (24/7 access), see <a href="https://wiki.sheffieldhackspace.org.uk/members/faq">the wiki</a>.</p>
+    <p class="privacy">For the process for becoming a keyholder (24/7 access), see <a target="_blank" href="https://wiki.sheffieldhackspace.org.uk/members/faq">the wiki</a>.</p>
     <hr id="result-top" />
     <?php
 
@@ -365,7 +365,7 @@
           id="name"
           required="true" />
 
-        <label class="above required" for="address">Address ("<a href="https://en.wikipedia.org/wiki/Service_address">Service address</a>")</label>
+        <label class="above required" for="address">Address ("<a target="_blank" href="https://en.wikipedia.org/wiki/Service_address">Service address</a>")</label>
         <input type="text" name="address" id="address" required="true" />
 
         <label class="above required" for="email">Email</label>
@@ -425,13 +425,13 @@
         <textarea class="optional" name="interests" id="interests"></textarea>
 
         <p class="privacy">
-          Sheffield Hackspace does not currently have a privacy policy (<a href="https://wiki.sheffieldhackspace.org.uk/members/info/privacy">why?</a>).
+          Sheffield Hackspace does not currently have a privacy policy (<a target="_blank" href="https://wiki.sheffieldhackspace.org.uk/members/info/privacy">why?</a>).
         </p>
         <p class="privacy">
           Sheffield Hackspace will use the data above to: manage membership, subscriptions, and space access; keep track of tool inductions; and to send emails about general meetings and other organisational changes.
         </p>
         <p class="privacy">
-          Sheffield Hackspace stores this information on a password-protected <a href="https://nextcloud.com/">NextCloud</a> Drive. According to Chapter 2 (113 & 113A) of the <a href="https://www.legislation.gov.uk/ukpga/2006/46/part/8/chapter/2">Companies Act 2006</a>, we must legally collect a name and service address for each member, which must be kept for ten years. After termination of membership, any other data will be stored for up to three years in case of return, unless you request its deletion by emailing <a href="mailto:trustees@sheffieldhackspace.org.uk">trustees@sheffieldhackspace.org.uk</a>.
+          Sheffield Hackspace stores this information on a password-protected <a target="_blank" href="https://nextcloud.com/">NextCloud</a> Drive. According to Chapter 2 (113 & 113A) of the <a target="_blank" href="https://www.legislation.gov.uk/ukpga/2006/46/part/8/chapter/2">Companies Act 2006</a>, we must legally collect a name and service address for each member, which must be kept for ten years. After termination of membership, any other data will be stored for up to three years in case of return, unless you request its deletion by emailing <a href="mailto:trustees@sheffieldhackspace.org.uk">trustees@sheffieldhackspace.org.uk</a>.
         </p>
 
         <input type="checkbox" id="privacy" name="privacy" required="true">
@@ -442,9 +442,8 @@
         </label>
 
         <p class="privacy">
-          Under-18s cannot be members, but can attend with a parent or guardian. See more on <a href="https://wiki.sheffieldhackspace.org.uk/">the FAQ page</a>.
+          Under-18s cannot be members, but can attend with a parent or guardian. See more on <a target="_blank" href="https://wiki.sheffieldhackspace.org.uk/">the FAQ page</a>.
         </p>
-
         <input type="checkbox" id="overeighteen" name="overeighteen" required="true">
         <label for="overeighteen" class="checkable">
           <span class="required">
