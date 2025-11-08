@@ -237,6 +237,8 @@
         bad("Your submission didn't have: email");
       } else if (!array_key_exists("privacy", $_POST) || $_POST['privacy'] == "") {
         bad("You did not agree to the privacy notice");
+      } else if (!array_key_exists("healthsafety", $_POST) || $_POST['healthsafety'] == "") {
+        bad("You did not agree to have read the health & safety policies");
       } else if (!array_key_exists("overeighteen", $_POST) || $_POST['overeighteen'] == "") {
         bad("You did not agree that you are over 18");
       } else {
@@ -451,6 +453,15 @@
           </span>
         </label>
 
+        <p class="privacy">
+          We have a few Health & Safety policies available on <a target="_blank" href="https://wiki.sheffieldhackspace.org.uk/members/health-and-safety">the wiki</a>. All members are required to read them.
+        </p>
+        <input type="checkbox" id="healthsafety" name="healthsafety" required="true">
+        <label for="healthsafety" class="checkable">
+          <span class="required">
+            I have read and understood the <a target="_blank" href="https://wiki.sheffieldhackspace.org.uk/members/health-and-safety">Health & Safety policies</a>
+          </span>
+        </label>
 
         <hr class="bottom" />
         <button class="submit" type="submit">Submit</button>
@@ -468,7 +479,7 @@
     </p>
     <p>Something broken or misleading? <a href="https://github.com/sheffieldhackspace/membership-form">suggest a change!</a></p>
     <p>
-      v1.0.0 · <a href="https://github.com/sheffieldhackspace/membership-form">source</a>
+      v1.0.2 · <a href="https://github.com/sheffieldhackspace/membership-form">source</a>
     </p>
   </footer>
   <br>
