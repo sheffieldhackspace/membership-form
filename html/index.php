@@ -229,8 +229,8 @@
         bad("Your submission didn't have: name");
       } else if (!array_key_exists("secret", $_POST) || $_POST['secret'] == "") {
         bad("Your submission didn't have the secret word!");
-      } else if ($_POST['secret'] != $env["SECRET"]) {
-        bad("that's not the correct secret word :( You put: '" . htmlspecialchars($_POST['secret']) . "'. Make sure it's all lowercase!");
+      } else if (strtolower($_POST['secret']) != $env["SECRET"]) {
+        bad("that's not the correct secret word :( You put: '" . htmlspecialchars($_POST['secret']));
       } else if (!array_key_exists("address", $_POST) || $_POST['address'] == "") {
         bad("Your submission didn't have: address");
       } else if (!array_key_exists("email", $_POST) || $_POST['email'] == "") {
