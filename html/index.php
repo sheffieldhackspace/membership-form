@@ -454,12 +454,12 @@
         </label>
 
         <p class="privacy">
-          We have a few Health & Safety policies available on <a target="_blank" href="https://wiki.sheffieldhackspace.org.uk/members/health-and-safety">the wiki</a>. All members are required to read them.
+          We have a few Health & Safety policies available on <a target="_blank" href="https://wiki.sheffieldhackspace.org.uk/public/health-and-safety">the wiki</a>. All members are required to read them.
         </p>
         <input type="checkbox" id="healthsafety" name="healthsafety" required="true">
         <label for="healthsafety" class="checkable">
           <span class="required">
-            I have read and understood the <a target="_blank" href="https://wiki.sheffieldhackspace.org.uk/members/health-and-safety">Health & Safety policies</a>
+            I have read and understood the <a target="_blank" href="https://wiki.sheffieldhackspace.org.uk/public/health-and-safety">Health & Safety policies</a>
           </span>
         </label>
 
